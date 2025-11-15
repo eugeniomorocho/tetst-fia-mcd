@@ -4,8 +4,19 @@ import streamlit as st
 st.title("💻 Frequency Plot from a slider")
 
 # Slider widget to control frequency
-frequency = st.slider("Select Frequency", 1, 10, 5)
+frequency = st.slider("Select Frequency", 1, 100, 50)
 
+# Display the selected frequency
+st.write(f"Selected Frequency: {frequency} Hz")
+
+# Compute a simple sine wave based on the selected frequency
+import numpy as np
+import pandas as pd
+t = np.linspace(0, 1, 500)
+y = np.sin(2 * np.pi * frequency * t)
+df = pd.DataFrame({"time_s": t, "amplitude": y})
+# Display a line chart using the DataFrame, indexed by time_s
+st.line_chart(df.set_index("time_s"))
 
 
 
